@@ -1,9 +1,11 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import os
 from dotenv import load_dotenv
+from typing import Dict, Any
 
 # Import your existing components
 from langsmith import Client
@@ -11,6 +13,7 @@ from langchain_openai import ChatOpenAI
 from langgraph.prebuilt import create_react_agent
 from langchain_tableau.tools.simple_datasource_qa import initialize_simple_datasource_qa
 from utilities.prompt import AGENT_SYSTEM_PROMPT
+from by_pass import is_bypass_enabled, get_mock_response
 
 # Load environment variables
 load_dotenv()
@@ -18,15 +21,24 @@ load_dotenv()
 # Add LangSmith tracing
 langsmith_client = Client()
 
-config = {
+config: Dict[str, Any] = {
     "run_name": "Tableau Langchain Web_App.py"
 }
 
 # Create FastAPI app
 app = FastAPI(title="Tableau AI Chat", description="Simple AI chat interface for Tableau data")
 
-# Serve static files (HTML, CSS, JS)
-app.mount("/static", StaticFiles(directory="static"), name="static")
+# Add CORS middleware
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# Serve static files with proper caching
+app.mount("/static", StaticFiles(directory="static", html=True), name="static")
 
 # Request/Response models
 class ChatRequest(BaseModel):
@@ -67,18 +79,24 @@ def setup_agent():
 agent = setup_agent()
 
 @app.get("/")
-def home():
+async def home():
     """Serve the main HTML page"""
-    return FileResponse('static/index.html')
+    return FileResponse('static/index.html', headers={"Cache-Control": "no-cache"})
 
 @app.get("/index.html")
-def static_index():
-    return FileResponse('static/index.html')
+async def static_index():
+    return FileResponse('static/index.html', headers={"Cache-Control": "no-cache"})
 
 @app.post("/chat")
-def chat(request: ChatRequest) -> ChatResponse:
+async def chat(request: ChatRequest) -> ChatResponse:
     """Handle chat messages - this is where the AI magic happens"""
     try:
+        # Check if OpenAI bypass is enabled
+        if is_bypass_enabled():
+            # Return a mock response instead of calling OpenAI
+            response_text = get_mock_response()
+            return ChatResponse(response=response_text)
+        
         # Use your existing agent logic
         messages = {"messages": [("user", request.message)]}
         
@@ -98,4 +116,11 @@ def chat(request: ChatRequest) -> ChatResponse:
 # Run the app
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    uvicorn.run(
+        "web_app:app",
+        host="0.0.0.0",
+        port=8000,
+        reload=True,
+        reload_dirs=["static", "templates"],
+        reload_delay=1
+    )

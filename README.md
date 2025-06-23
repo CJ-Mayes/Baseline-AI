@@ -23,7 +23,7 @@ Before you begin, ensure you have the following:
 
 When using this code, data from Tableau will be sent to an external AI model (by default, OpenAI). For learning and testing, it is strongly recommended to use the Superstore dataset included with Tableau.
 
-If you need to process sensitive or proprietary information, consider configuring the tool to use a local AI model instead of an external service. This approach ensures your data remains within your organisation’s infrastructure and reduces the risk of data exposure.
+If you need to process sensitive or proprietary information, consider configuring the tool to use a local AI model instead of an external service. This approach ensures your data remains within your organisation's infrastructure and reduces the risk of data exposure.
 
 ## 📺 Step Up Guide 
 
@@ -106,6 +106,27 @@ DATASOURCE_LUID='unique identifier for a data source found via the graphql metad
 ```
 
 ⚠️ **Security Note:** Never commit your `.env` file to version control. It's already included in `.gitignore`.
+
+## 🔧 OpenAI Bypass Toggle
+
+For testing and development purposes, you can bypass the OpenAI API calls entirely. This is useful when you want to test the frontend without making actual API calls or when you don't have API credits available.
+
+### How to Enable Bypass Mode
+
+Add this line to your `.env` file:
+
+```
+BYPASS_OPENAI=true
+```
+
+When enabled, the chat will return random mock responses instead of calling the OpenAI API. This allows you to:
+- Test the frontend interface without API costs
+- Develop and debug the UI without network dependencies
+- Demo the application without requiring API keys
+
+To disable bypass mode, either:
+- Remove the `BYPASS_OPENAI` line from your `.env` file, or
+- Set it to `BYPASS_OPENAI=false`
 
 ## 🏃‍♂️ Running the Application
 

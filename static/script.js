@@ -1,4 +1,4 @@
-// Simple chat functionality
+// Simple chat functionality for chatbot in new block section
 
 async function sendMessage() {
     const input = document.getElementById('messageInput');
@@ -62,7 +62,7 @@ function handleEnter(event) {
     }
 }
 
-// Focus on input when page loads
 document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('messageInput').focus();
-});
+    const input = document.getElementById('messageInput');
+    if (input) input.focus();
+}); 

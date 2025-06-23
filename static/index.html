@@ -1,37 +1,364 @@
 <!DOCTYPE html>
-<html>
+<!--[if lt IE 9 ]><html class="no-js oldie" lang="en"> <![endif]-->
+<!--[if IE 9 ]><html class="no-js oldie ie9" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<html class="no-js" lang="en">
+<!--<![endif]-->
+
 <head>
-    <title>Tableau AI Chat</title>
+
+    <!--- basic page needs
+   ================================================== -->
     <meta charset="utf-8">
+    <title>CJ-Mayes.com</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- mobile specific metas
+   ================================================== -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" href="/static/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="static/style.css">
-    <script src="static/script.js"></script>
-    <script src="static/tableau.extensions.1.latest.min.js"></script>
+
+    <!-- CSS
+   ================================================== -->
+    <link rel="stylesheet" href="/static/css/base.css">
+    <link rel="stylesheet" href="/static/css/vendor.css">
+    <link rel="stylesheet" href="/static/css/main.css">
+
+    <!-- script
+   ================================================== -->
+    <script src="/static/js/modernizr.js"></script>
+    <script src="/static/js/pace.min.js"></script>
+
+    <!-- favicons
+	================================================== -->
+    <link rel="icon" href="static/images/logo.png" type="image/png">
 </head>
-<body>
-    <div class="container">
-        <header>
-            <h1>📊 Tableau AI Assistant</h1>
-            <p>Ask questions about your Tableau data!</p>
-        </header>
-        
-        <div class="chat-box" id="chatBox">
-            <div class="message bot">
-                Hello! Ask me anything about your Tableau data.
-                <br><br>
-                Try questions like:
-                <br>• "Show me the top customers by sales"
-                <br>• "What are the sales trends this quarter?"
-            </div>
-        </div>
-        
-        <div class="input-area">
-            <input type="text" id="messageInput" placeholder="Type your question here..." onkeypress="handleEnter(event)">
-            <button onclick="sendMessage()" id="sendBtn">Send</button>
-        </div>
+
+<body id="top">
+    <!-- rotating green banner -->
+    <div id="rotating-banner">
+        <span id="rotating-text">Welcome to Baseline AI!</span>
     </div>
 
-    <script src="/static/script.js"></script>
+    <!-- header 
+   ================================================== -->
+   <!-- header -->
+
+
+   <!-- home
+   ================================================== -->
+   <section id="home" data-parallax="scroll" data-image-src="/static/images/hero-bg-court.jpg" data-natural-width=3000 data-natural-height=2000>
+
+        <div class="overlay"></div>
+        <div class="home-content">        
+
+            <div class="row contents">                     
+                <div class="home-content-left">
+                    <div class="logo-and-title">
+                        <img src="/static/images/logo.png" alt="Baseline AI Logo" class="logo-above-title">
+                        <h3 data-aos="fade-up" class="baseline-title">Baseline AI</h3>
+                    </div>
+
+                    <h1 data-aos="fade-up">
+                        There Is <br>
+                        Only One <br>
+                        Wimbledon.
+                    </h1>
+
+                    <div class="buttons" data-aos="fade-up">
+                        <a href="https://github.com/CJ-Mayes/Website-Tutorials/tree/main" class="button stroke" target="_blank" rel="noopener noreferrer">
+                            <span class="icon-circle-down" aria-hidden="true"></span>
+                            Download Repo
+                        </a>
+                        <a href="https://www.youtube.com/channel/UCc1CJ3-h8NMM1hN-AAfsIig" class="button stroke" target="_blank" rel="noopener noreferrer">
+                            <span class="icon-play" aria-hidden="true"></span>
+                            Watch Demo
+                        </a>
+                    </div>                                         
+
+                </div>
+            </div>
+
+        </div> <!-- end home-content -->
+
+        <ul class="home-social-list">
+            <li>
+                <a href="https://x.com/_cjmayes" target="_blank" rel="noopener noreferrer"><i class="fa fa-twitter"></i></a>
+            </li>
+            <li>
+                <a href="https://www.youtube.com/channel/UCc1CJ3-h8NMM1hN-AAfsIig" target="_blank" rel="noopener noreferrer"><i class="fa fa-youtube-play"></i></a>
+            </li>
+        </ul>
+        <!-- end home-social-list -->
+
+        <div class="home-scrolldown">
+            <a href="#about" class="scroll-icon smoothscroll">
+                <span>Scroll Down</span>
+                <i class="icon-arrow-right" aria-hidden="true"></i>
+            </a>
+        </div>
+
+    </section> <!-- end home -->  
+
+
+    <!-- about
+    ================================================== -->
+    <section id="about">
+
+        <div class="row about-intro">
+
+            <div class="col-four">
+                <h1 class="intro-header" data-aos="fade-up">About Baseline AI</h1>
+            </div>
+            <div class="col-eight">
+                <p class="lead" data-aos="fade-up">
+                    This is a simple AI chatbot that uses the OpenAI API to answer questions about Wimbledon 2012 data. It's created as a playground for me to learn about AI, Tableau, and front end development.
+                </p>
+            </div>                       
+            
+        </div>
+
+        <body>
+            
+            
+            <div class="container">
+                <header>
+                </header>
+
+                <head>
+                    <title>Tableau AI Chat</title>
+                    <meta charset="utf-8">
+                    <meta name="viewport" content="width=device-width, initial-scale=1">
+                    <link rel="icon" href="/static/favicon.ico" type="image/x-icon">
+                    <link rel="stylesheet" href="static/style.css">
+                    <script src="static/script.js"></script>
+                    <script src="static/tableau.extensions.1.latest.min.js"></script>
+                </head>
+
+                <div class="bgrid step" data-item="2">
+                </br>
+                <h3>Baseline AI</h3>
+                    <p>Download the data below, or query it using the chat bot.
+                    </p> 
+                <a href="#" class="button button-primary" id="download-matches" style="margin-right: 10px;">Match Results</a>
+                <a href="#" class="button button-primary" id="download-pbp">Point By Point Data</a>
+                    <h3>Baseline AI</h3>
+                    <p>This raw dataset was used as part of my visualisation: The Golden Set , for Iron Viz.
+                    </p> 
+                 
+                <div style="display: flex; gap: 32px;">
+                  <div style="flex: 1;">
+                    <div class="chat-box" id="chatBox">
+                        <div class="message bot">
+                            Hello! Ask me anything about the match results of Wimbledon 2012, or the point by point data.
+                            <br><br>
+                            Alternatively, try one of the pre-defined prompts.
+                        </div>
+                    </div>
+                  </div>
+                  <div style="flex: 0 0 100px;">
+                    <div id="featured-prompts-container" style="background: #fafbfc; border-radius: 8px; padding: 20px; margin-left: 0; font-family: 'muli-light', sans-serif; font-size: 1.6rem; color: #495057;">
+                      <h4 style="margin-top: 0; font-family: 'muli-light', sans-serif; font-size: 1.6rem; color: #495057;">Featured Prompts</h4>
+                      <button class="button" style="width: 100%; height: 60px; margin-bottom: 10px; font-family: 'muli-light', sans-serif; font-size: 1.6rem; color: #495057; background: #f0f1f3; border: none;" onclick="sendFeaturedPrompt('Show me the match summary for the womens final.')">Show me the match summary for the womens final.</button>
+                      <button class="button" style="width: 100%; height: 60px; margin-bottom: 10px; font-family: 'muli-light', sans-serif; font-size: 1.6rem; color: #495057; background: #f0f1f3; border: none;" onclick="sendFeaturedPrompt('List all players who served more than 10 aces.')">List all players who served more than 10 aces.</button>
+                      <button class="button" style="width: 100%; height: 60px; font-family: 'muli-light', sans-serif; font-size: 1.6rem; color: #495057; background: #f0f1f3; border: none;" onclick="sendFeaturedPrompt('Who had the highest first serve percentage?')">Who had the highest first serve percentage?</button>
+                      <button class="button" style="width: 100%; height: 60px; font-family: 'muli-light', sans-serif; font-size: 1.6rem; color: #495057; background: #f0f1f3; border: none;" onclick="sendFeaturedPrompt('Who had the highest first serve percentage?')">How many points in a row did Yaroslava win against Sara Errani?</button>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="input-area">
+                    <input type="text" id="messageInput" placeholder="Ask a specific question about Wimbledon 2012 match results..." onkeypress="handleEnter(event)">
+                    <button onclick="sendMessage()" id="sendBtn">Send</button>
+                </div>
+            </div>
+
+        </div>  
+        
+            <script src="/static/script.js"></script>
+        </body>
+
+
+    <!-- about-features
+    ================================================== -->
+        <div class="row about-features">
+            
+            <div class="features-list block-1-3 block-m-1-2 block-mob-full group">
+
+                <div class="bgrid feature" data-aos="fade-up">	
+
+                    <span class="icon"><i class="icon-window"></i></span>            
+
+                    <div class="service-content">	
+
+                        <h3>Tableau Integration</h3>
+
+                        <p>Following the steps from the Information Lab, I was able to add the Wimbledon chatbot to this webpage. I've disabled the chatbot for now, but you can still see the code in the repo.</p>
+                        
+                    </div> 	         	 
+
+                    </div> <!-- /bgrid -->
+
+                    <div class="bgrid feature" data-aos="fade-up">	
+
+                        <span class="icon"><i class="icon-image"></i></span>                          
+
+                    <div class="service-content">	
+                        <h3>Response Ready</h3>  
+
+                        <p>
+                            With Tableau Langchain, you can ask questions about your data and get answers in real time. The chatbot connects directly to the data stored on the server to produce a response. It will only query the dataset passed to it.
+                        </p>
+
+                        
+                    </div>	                          
+
+                </div> <!-- /bgrid -->
+
+                <div class="bgrid feature" data-aos="fade-up">
+
+                    <span class="icon"><i class="icon-paint-brush"></i></span>		            
+
+                    <div class="service-content">
+                        <h3>Stylish Design</h3>
+
+                        <p>I've mirrored Wimbledon's website with the color scheme, and green banner bar at the top - all whilst adding my own unique touch.</p> 
+                            
+                    </div> 	            	               
+
+                </div> <!-- /bgrid -->
+
+                </div> <!-- /bgrid -->
+
+            </div> <!-- end features-list -->
+
+        </div> <!-- end about-features -->
+
+    </section>
+
+
+        <!-- new-block
+    ================================================== -->
+        <section id="new-block">
+        
+            <div class="about-how-content" data-aos="fade-up">
+                <div class="about-how-steps block-1-2 block-tab-full group">
+
+                    <div class="bgrid step" data-item="1">
+                        <h3>Tableau Visualisation</h3>
+                        <p> This is the publically available workbook for the Golden Set Iron Viz. This visual made it to the shortlist of the information is beautiful awards 2024.
+                            It can be viewed on Tableau Public. If you'd like to learn how it was rendered, check the presentation I made at the <a href="https://www.youtube.com/watch?v=69F7g8F33Qw" target="_blank" rel="noopener noreferrer">Sports Tableau User Group</a>.
+                        </p> 
+
+                        <iframe src="/static/viz-render.html" width="1450" height="877" style="border:none;display:block;margin:0 auto;"></iframe>
+
+                        <script type="text/javascript">
+                          var divElement = document.getElementById('viz1750269880039');
+                          var vizElement = divElement.getElementsByTagName('object')[0];
+                          vizElement.style.width = '1400px';
+                          vizElement.style.height = '827px';
+                          var scriptElement = document.createElement('script');
+                          scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+                          vizElement.parentNode.insertBefore(scriptElement, vizElement);
+                        </script>
+
+                    </div>
+
+
+
+        </section>
+    <!--  how to
+    ================================================== -->
+    <!-- footer
+    ================================================== -->
+    <footer>
+      <div class="footer-bottom">
+        <span>&copy; 2024 Baseline AI</span>
+        <span> | </span>
+        <span>Designed by CJ-Mayes.com</span>
+      </div>
+    </footer>
+
+    <div id="preloader"> 
+    	<div id="loader"></div>
+    </div>  
+
+    <!-- Java Script
+    ================================================== -->
+    <script src="/static/js/jquery-2.1.3.min.js"></script>
+    <script src="/static/js/plugins.js"></script>
+    <script src="/static/js/main.js"></script>
+
+    <script>
+    const texts = [
+        'Welcome to Baseline AI!',
+        'Designed By CJ-Mayes.com',
+        'Built For Demo Purposes'
+    ];
+    let idx = 0;
+    const textSpan = document.getElementById('rotating-text');
+    function rotateText() {
+        // Swipe out current text
+        textSpan.classList.remove('swipe-in');
+        textSpan.classList.add('swipe-out');
+        setTimeout(() => {
+            // After swipe out, change text and swipe in
+            idx = (idx + 1) % texts.length;
+            textSpan.textContent = texts[idx];
+            textSpan.classList.remove('swipe-out');
+            textSpan.classList.add('swipe-in');
+        }, 700); // match animation duration
+    }
+    setInterval(rotateText, 2000);
+    // Initial swipe-in effect
+    textSpan.classList.add('swipe-in');
+    </script>
+
+    <script>
+    function downloadFile(url, filename) {
+        fetch(url)
+            .then(response => response.blob())
+            .then(blob => {
+                const link = document.createElement('a');
+                link.href = window.URL.createObjectURL(blob);
+                link.download = filename;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            });
+    }
+
+    document.getElementById('download-matches').addEventListener('click', function(e) {
+        e.preventDefault();
+        downloadFile(
+            'https://raw.githubusercontent.com/JeffSackmann/tennis_slam_pointbypoint/master/2012-wimbledon-points.csv',
+            '2012-wimbledon-points.csv'
+        );
+    });
+
+    document.getElementById('download-pbp').addEventListener('click', function(e) {
+        e.preventDefault();
+        downloadFile(
+            'https://raw.githubusercontent.com/JeffSackmann/tennis_slam_pointbypoint/master/2012-wimbledon-matches.csv',
+            '2012-wimbledon-matches.csv'
+        );
+    });
+    </script>
+
+    <script>
+    function sendFeaturedPrompt(promptText) {
+        // Set the message input value and trigger the send button
+        var input = document.getElementById('messageInput');
+        if (input) {
+            input.value = promptText;
+            var sendBtn = document.getElementById('sendBtn');
+            if (sendBtn) {
+                sendBtn.click();
+            }
+        }
+    }
+    </script>
+
 </body>
+
 </html>

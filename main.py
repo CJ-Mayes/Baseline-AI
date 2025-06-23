@@ -13,11 +13,17 @@ from utilities.chat import print_stream
 from utilities.prompt import AGENT_SYSTEM_PROMPT
 
 # Load environment
-load_dotenv()
+load_dotenv(override=True)  # Force override existing environment variables
+
+# Debug print to verify .env loading
+print("OpenAI API Key loaded:", bool(os.getenv('OPENAI_API_KEY')))
+print("API Key starts with:", os.getenv('OPENAI_API_KEY')[:7] if os.getenv('OPENAI_API_KEY') else "Not found")
+print("Full API Key:", os.getenv('OPENAI_API_KEY'))  # This will help us see exactly what's being loaded
 
 # Add LangSmith tracing
 langsmith_client = Client()
 
+# Gives a name to the configuration
 config = {
     "run_name": "Tableau Langchain Main.py"
 }
